@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS Absolute Positioning</title>
+  </head>
+  <body>
+    <section id="section">
+      <div id="card1" class="card"></div>
+      <div id="card2" class="card"></div>
+      <div id="card3" class="card"></div>
+      <div id="card4" class="card"></div>
+      <div id="card5" class="card"></div>
+      <div id="card6" class="card"></div>
+      <div id="card7" class="card"></div>
+      <div id="card8" class="card"></div>
+      <div id="card9" class="card"></div>
+      <div id="move"></div>
+    </section>
+    <span style="left:110px;position:absolute;">Score = </span><span id="score" style="left:260px;position:absolute;">0</span><br>
+    <br>
+    <span style="left:80px;position:absolute;">Time-left = </span><span id="timer" style="left:270px;position:absolute;">30</span><br><br><br>
+    <button onclick="start()" id="start" style="left:105px;position:absolute;">Start</button><br><br><button id="info" onclick="info()">How to play?</button>
+    <script>
+    alert("Don't forgot to leave upvote!😄")
+      let count = 0;
+      let yes = false;
+      let timeValue;
+      let moveInterval;
+      let timerInterval;
+
+     function move() {
+  let top = [8, 129, 250];
+  let left = [8, 129, 250];
+  let random_top = Math.floor(Math.random() * 3);
+  let random_left = Math.floor(Math.random() * 3);
+  let move = document.getElementById("move");
+  move.style.top = top[random_top] + "px";
+  move.style.left = left[random_left] + "px";
+  void move.offsetWidth; // trigger reflow to start animation
+}
+
+      function start() {
+        count = 0;
+        yes = true;
+        timeValue = 30;
+       document.getElementById("start").style.display = "none";
+       document.getElementById("start").innerHTML = "Re-start";
+        document.getElementById("score").innerHTML = count;
+        document.getElementById("timer").innerHTML = timeValue;
+        moveInterval = setInterval(move, 600);
+        timerInterval = setInterval(function () {
+          timeValue -= 1;
+          document.getElementById("timer").innerHTML = timeValue;
+          if (timeValue === 0) {
+           document.getElementById("start").style.display = "block"; clearInterval(moveInterval);
+            clearInterval(timerInterval);
+            alert("Time up! Your score is " + count);
+            yes = false;
+          }
+        }, 1000);
+      }
+
+      window.onload = function () {
+        let move = document.getElementById("move");
+        move.onclick = function () {
+          if (yes) {
+            count += 1;
+            document.getElementById("score").innerHTML = count;
+          }
+        };
+      };
+      function info(){
+          alert("When you click on the start button the rabbit will start moving at any ditch(randomly).Click on the rabbit to increase your score.Best of luck👍👍")
+      }
+    </script>
+    <style>
+    body{
+    background-color:#ff0;
+    }
+      #section {
+        position: relative;
+        height: 360px;
+        width: 360px;
+        margin: 0 auto;
+        box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+      }
+
+      .card {
+        background: url("https://i.imgur.com/oFHkBby.jpg");
+        background-size: cover;
+        width: 108px;
+        height: 108px;
+        margin: 3px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: absolute;
+        background-position:-20px;
+      }
+
+      #card1 {
+        top: 0;
+        left: 0;
+      }
+
+      #card2 {
+        top: 0;
+        left: 121px;
+      }
+
+      #card3 {
+        top: 0;
+        left: 242px;
+      }
+
+      #card4 {
+        top: 121px;
+        left: 0;
+      }
+
+      #card5 {
+        top: 121px;
+        left: 121px;
+      }
+
+      #card6 {
+        top: 121px;
+        left: 242px;
+      }
+
+      #card7 {
+        top: 242px;
+        left: 0;
+      }
+
+      #card8 {
+        top: 242px;
+        left: 121px;
+      }
+
+      #card9 {
+        top: 242px;
+        left: 242px;
+      }
+
+      #move {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.5);
+        background-image: url("https://i.imgur.com/A56iFor.gif");
+        background-size: cover;
+        z-index: 1;
+        top:8px;
+        left:8px;
+        transition:top 0.5s ease-in-out, left 0.5s ease-in-out;
+      }
+     #move:active{
+    background-color:#eee;
+}
+      span {
+        font-size: 30px;
+      }
+      #start{
+    height:40px;width:200px;background-color:#0f0;font-size:20px;letter-spacing:3px;
+}
+#info{
+    height:60px;width:300px;background-color:#0ff;font-size:20px;letter-spacing:3px;position:absolute;left:50px;
+}
+    </style>
+  </body>
+</html>
